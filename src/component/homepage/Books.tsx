@@ -2,12 +2,21 @@ import React from "react";
 import BookCard from "../BookCard";
 import { IBook } from "../../type/Book";
 
-const getBooks = async()=>{
-  const res = await fetch('http://localhost:3000/booksData.json')
-  const data = await res.json();
-  return data;
-}
-const Books = async()=>{
+const getBooks = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`, {
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error("Failed to fetch data");
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error Fatching Book Data:", error)
+    return [];
+  }
+};
+
+const Books = async () => {
   const bookdata = await getBooks
 }
 const booksData: IBook[] = [
@@ -162,7 +171,7 @@ const BooksList = () => {
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-2xl font-bold text-gray-800 mb-6 justify-center">Explore All Books</h1>
       <div className="grid grid-cols-4 gap-6">
-        {booksData.slice(0,9).map((book) => (
+        {booksData.slice(0, 9).map((book) => (
           <BookCard key={book.bookId} book={book} />
         ))}
       </div>

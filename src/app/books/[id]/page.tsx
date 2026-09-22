@@ -1,51 +1,3 @@
-// import { IBook } from '@/type/Book';
-// import Image from 'next/image';
-// import React from 'react';
-
-// interface IDetailsPage {
-//     params: Promise<{
-//         id: string
-//     }>;
-// }
-
-
-// const getBooks = async () => {
-//     const res = await fetch('http://localhost:3000/booksData.json')
-//     const data = await res.json();
-//     return data;
-// }
-
-// const BookDetailPage = async ({ params }: IDetailsPage) => {
-
-
-//     const { id } = await params
-//     const bookData = await getBooks();
-//     const books = bookData.find((book: IBook) => String(book.bookId) === String(id))
-//     return (
-//         <div className='container mx-auto'>
-//             <div className="card lg:card-side bg-base-100 shadow-sm">
-//                 <figure>
-//                     <Image
-//                         src="../../../../public/hero_img.jpg"
-//                         alt="Album" width={800} height={500}/>
-//                 </figure>
-//                 <div className="card-body">
-//                     <h2 className="card-title">New album is released!</h2>
-//                     <p>Click the button to listen on Spotiwhy app.</p>
-//                     <div className="card-actions justify-end">
-//                         <button className="btn btn-primary">Listen</button>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default BookDetailPage;
-
-
-
-
 
 import Image from "next/image";
 import { IBook } from "@/type/Book"; // আপনার ইন্টারফেসের নাম অনুযায়ী
@@ -58,14 +10,17 @@ interface IDetailsPage {
 
 // Data fetching function
 const getBooks = async () => {
-  // Public folder-er file node.js fs diye direct read kora dynamic app-e better, 
-  // kintu fetch path ebhabe diben:
-  const res = await fetch("http://localhost:3000/booksData.json", {
+  try{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`, {
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Failed to fetch data");
   const data = await res.json();
   return data;
+}catch(error){
+  console.error("Error Fatching Book Data:", error)
+  return[];
+}
 };
 
 const BookDetailPage = async ({ params }: IDetailsPage) => {

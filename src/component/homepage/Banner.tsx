@@ -1,25 +1,3 @@
-// import Image from 'next/image';
-// import React from 'react';
-// import BannerImg from '../../../public/hero_img.jpg'
-// const Banner = () => {
-//     return (
-//         <section className='py-20'>
-//             <div className='items-center grid grid-cols-2 gap-4 container mx-auto bg-slate-300 rounded-3xl p-4'>
-//             <div className='space-y-4'>
-//                 <h2 className='font-bold text-3xl'>Books to freshen up <br/> your bookshelf</h2>
-//                 <button className="btn btn-warning">View The List</button>
-//             </div>
-//             <div>
-//                 <Image src={BannerImg} alt='Banner'/>
-//             </div>
-//         </div>
-//         </section>
-//     );
-// };
-
-// export default Banner;
-
-
 import Image from 'next/image';
 import React from 'react';
 import BannerImg from '../../../public/hero_img.jpg';
