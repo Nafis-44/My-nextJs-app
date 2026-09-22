@@ -10,17 +10,20 @@ interface IDetailsPage {
 
 // Data fetching function
 const getBooks = async () => {
-  try{
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`, {
-    cache: "no-store",
-  });
-  if (!res.ok) throw new Error("Failed to fetch data");
-  const data = await res.json();
-  return data;
-}catch(error){
-  console.error("Error Fatching Book Data:", error)
-  return[];
-}
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SERVER_BASE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/booksData.json`, {
+      cache: "no-store",
+    });
+    if (!res.ok){
+       console.error("Fetch faild with status:", res.status);
+       return [];}
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error Fatching Book Data:", error)
+    return [];
+  }
 };
 
 const BookDetailPage = async ({ params }: IDetailsPage) => {
@@ -28,7 +31,7 @@ const BookDetailPage = async ({ params }: IDetailsPage) => {
   const bookData: IBook[] = await getBooks();
 
   // bookId specific book find kora
-  const book = bookData.find((b) => String(b.bookId) === String(id));
+  const book = bookData?.find((b) => Number(b.bookId) === Number(id));
 
   if (!book) {
     return <div className="container mx-auto p-6">Book not found!</div>;
@@ -58,8 +61,8 @@ const BookDetailPage = async ({ params }: IDetailsPage) => {
           </p>
           <p className="text-sm text-gray-500">Total Pages: {book.totalPages}</p>
           <div className="card-actions justify-end mt-4">
-            <ReadButton book={book}/>
-            <WishListButton book={book}/>
+            <ReadButton book={book} />
+            <WishListButton book={book} />
           </div>
         </div>
       </div>

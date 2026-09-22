@@ -56,8 +56,8 @@ const ListedBooks = () => {
                 <div className="tab-content bg-base-100 border-base-300 p-6 space-x-100">
                     {
                         sortedReadBooks.length > 0 ? (
-                            sortedReadBooks.map((book: IBook) => {
-                                return <ListedBooksCard key={book.bookId} book={book} />
+                            sortedReadBooks.map((book: IBook,index:number) => {
+                                return <ListedBooksCard key={index} book={book} />
                             })) : (<p className='text-center text-lg font-semibold'>
                                 No read Books Found
                             </p>
@@ -68,8 +68,8 @@ const ListedBooks = () => {
                 <div className="tab-content bg-base-100 border-base-300 p-6">
                     {
                         sortedWishList.length > 0 ? (
-                            sortedWishList.map((book: IBook) => {
-                                return <ListedBooksCard key={book.bookId} book={book} />
+                            sortedWishList.map((book: IBook,index:number) => {
+                                return <ListedBooksCard key={index} book={book} />
                             })
                         ) : (<p className='text-center text-lg font-semibold'>
                             No read Books Found
