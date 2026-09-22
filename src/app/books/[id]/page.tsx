@@ -1,30 +1,34 @@
-
 import Image from "next/image";
 import { IBook } from "@/type/Book"; // আপনার ইন্টারফেসের নাম অনুযায়ী
 import ReadButton from "@/component/BookDetails/ReadButton";
-import WishListButton from "@/component/BookDetails/WishlistButton";
+import WishListButton from "@/component/BookDetails/WishlistButton"
+import booksData from "../../../../public/booksData.json"
 
 interface IDetailsPage {
   params: Promise<{ id: string }>;
 }
 
-// Data fetching function
-const getBooks = async () => {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_SERVER_BASE_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/booksData.json`, {
-      cache: "no-store",
-    });
-    if (!res.ok){
-       console.error("Fetch faild with status:", res.status);
-       return [];}
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error Fatching Book Data:", error)
-    return [];
-  }
-};
+// // Data fetching function
+// const getBooks = async () => {
+//   try {
+//     const baseUrl = process.env.NEXT_PUBLIC_SERVER_BASE_URL || "http://localhost:3000";
+//     const res = await fetch(`${baseUrl}/booksData.json`, {
+//       cache: "no-store",
+//     });
+//     if (!res.ok){
+//        console.error("Fetch faild with status:", res.status);
+//        return [];}
+//     const data = await res.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error Fatching Book Data:", error)
+//     return [];
+//   }
+// };
+
+const getBooks = async()=>{
+  return booksData
+}
 
 const BookDetailPage = async ({ params }: IDetailsPage) => {
   const { id } = await params;
