@@ -1,13 +1,16 @@
 'use client';
-import BookCard from '@/component/BookCard';
+// import BookCard from '@/component/BookCard';
 import ListedBooksCard from '@/component/shared/ListedBooksCard';
 import { BookContex } from '@/context/BookProvider';
 import { IBook } from '@/type/Book';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useContext, useState } from 'react';
 
 const ListedBooks = () => {
-    const { readbook, wishlist } = useContext(BookContex)
+    const { readbook, wishlist } = useContext(BookContex) as {
+        readbook:IBook[];
+        wishlist:IBook[];
+    }
 
     const [sortBy, setsortBy] = useState<"rating" | "pages" | "year">("rating")
     
@@ -50,7 +53,7 @@ const ListedBooks = () => {
             <div className="tabs tabs-lift">
                 <input type="radio" name="my_tabs_3" className="tab" aria-label={`Read Books (${readbook.length})`}
                 />
-                <div className="tab-content bg-base-100 border-base-300 p-6 space-x-[400px]">
+                <div className="tab-content bg-base-100 border-base-300 p-6 space-x-100">
                     {
                         sortedReadBooks.length > 0 ? (
                             sortedReadBooks.map((book: IBook) => {

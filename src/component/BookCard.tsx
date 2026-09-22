@@ -5,7 +5,7 @@ import { IBook } from "@/type/Book"; // আপনার Type Path অনুয�
 
 const BookCard = ({ book }: { book: IBook }) => {
   const {
-    bookId,
+    // bookId,
     bookName,
     author,
     image,
@@ -57,7 +57,7 @@ const BookCard = ({ book }: { book: IBook }) => {
         {/* Additional Info (Pages, Publisher, Year) */}
         <div className="flex items-center justify-between text-xs text-gray-400 border-t border-dashed pt-3 my-3">
           <span>{totalPages} Pages</span>
-          <span className="line-clamp-1 max-w-[100px]">{publisher}</span>
+          <span className="line-clamp-1 max-w-20">{publisher}</span>
           <span>{yearOfPublishing}</span>
         </div>
       </div>

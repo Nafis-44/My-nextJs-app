@@ -2,7 +2,7 @@
 import { BookContex } from '@/context/BookProvider';
 import { IBook } from '@/type/Book';
 import React, { useContext } from 'react';
-import { Bar, BarChart, CartesianGrid, Label, LabelList, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, BarShapeProps, CartesianGrid, Label, LabelList, LabelProps, Tooltip, XAxis, YAxis } from 'recharts';
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink', 'black'];
 const getPath = (x: number, y: number, width: number, height: number) => {
@@ -37,7 +37,7 @@ const CustomColorLabel = (props: LabelProps) => {
 
 const ReadBooks = () => {
 
-    const {readbook} = useContext(BookContex)
+    const {readbook} = useContext(BookContex) as {readbook:IBook[]};
 
     const data = readbook.map((book:IBook,index:number)=>{
         return {

@@ -1,8 +1,8 @@
-import React from "react";
+
 import BookCard from "../BookCard";
 import { IBook } from "../../type/Book";
 
-const getBooks = async () => {
+ export const getBooks = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`, {
       cache: "no-store",
@@ -16,9 +16,9 @@ const getBooks = async () => {
   }
 };
 
-const Books = async () => {
-  const bookdata = await getBooks
-}
+// const Books = async () => {
+//   const bookdata = await getBooks
+// }
 const booksData: IBook[] = [
   {
     bookId: 1,
@@ -171,7 +171,7 @@ const BooksList = () => {
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-2xl font-bold text-gray-800 mb-6 justify-center">Explore All Books</h1>
       <div className="grid grid-cols-4 gap-6">
-        {booksData.slice(0, 9).map((book) => (
+        {booksData.slice(0, 9).map((book:IBook) => (
           <BookCard key={book.bookId} book={book} />
         ))}
       </div>

@@ -9,6 +9,6 @@ export interface IBook {
   totalPages: number;
   publisher: string;
   yearOfPublishing: number;
-  pages:number,
-  year:number
+  pages?:number,
+  year?:number
 }
